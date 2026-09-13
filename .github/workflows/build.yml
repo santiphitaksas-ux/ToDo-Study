@@ -10,10 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     - name: Build with Buildozer
-      uses: ArtemSydoryk/buildozer-action@v1.2.0
+      uses: kivy/buildozer-action@master
       with:
         command: buildozer -v android debug
         submodule: false
