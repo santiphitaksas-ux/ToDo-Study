@@ -9,10 +9,11 @@ requirements = python3,kivy,sqlite3
 orientation = portrait
 osx.kivy_version = 2.1.0
 fullscreen = 0
+icon.filename = S__7282690.jpg
 android.permissions = INTERNET
-android.api = 33
+android.api = 31
 android.minapi = 21
-android.ndk = 25b
+android.ndk = 23b
 android.accept_sdk_license = True
 p4a.branch = master
 
