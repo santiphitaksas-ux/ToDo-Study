@@ -5,15 +5,14 @@ package.domain = org.test
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
-requirements = python3,kivy,sqlite3
+requirements = python3,kivy==2.2.1,sqlite3
 orientation = portrait
-osx.kivy_version = 2.1.0
+osx.kivy_version = 2.2.1
 fullscreen = 0
-icon.filename = S__7282690.jpg
 android.permissions = INTERNET
-android.api = 31
+android.api = 33
 android.minapi = 21
-android.ndk = 23b
+android.ndk = 25b
 android.accept_sdk_license = True
 p4a.branch = master
 
