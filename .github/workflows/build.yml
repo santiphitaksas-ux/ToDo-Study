@@ -26,11 +26,12 @@ jobs:
         pip install "cython<3.0.0"
         pip install buildozer
 
-    - name: Build with Buildozer
+    - name: Accept Android Licenses & Build
       run: |
-        buildozer android debug <<EOF
-        y
-        EOF
+        mkdir -p ~/.android
+        touch ~/.android/repositories.cfg
+        yes | buildozer -v android debug || true
+        buildozer -v android debug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
