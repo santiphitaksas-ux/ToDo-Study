@@ -10,22 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
 
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libsqlite3-dev cmake libffi-dev libssl-dev
+        pip install --upgrade buildozer "cython<3.0.0"
+
     - name: Build with Buildozer
-      uses: ArtemSydoryk/buildozer-action@v1.2.0
-      with:
-        command: buildozer -v android debug
-        submodule: false
+      run: |
+        yes | buildozer -v android debug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: todostudy-apk
+        name: app-release
         path: bin/*.apk
