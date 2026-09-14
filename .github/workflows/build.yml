@@ -32,9 +32,7 @@ jobs:
       run: |
         mkdir -p ~/.android
         touch ~/.android/repositories.cfg
-        buildozer -v android debug <<EOF
-        y
-        EOF
+        printf 'y\ny\ny\ny\n' | buildozer -v android debug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
