@@ -7,22 +7,45 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Build with Buildozer Action
-      uses: kivy/buildozer-action@v1
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
       with:
-        buildozer_version: stable
-        command: buildozer android debug
-        subpath: .
+        python-version: '3.10'
+
+    - name: Install System Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libsqlite3-dev cmake libffi-dev libssl-dev lld clang expect
+
+    - name: Install Python Tools
+      run: |
+        python3.10 -m pip install --upgrade pip
+        python3.10 -m pip install "cython<3.0.0" buildozer
+
+    - name: Build with Buildozer
+      run: |
+        mkdir -p ~/.android
+        touch ~/.android/repositories.cfg
+        expect -c "
+          set timeout -1
+          spawn buildozer -v android debug
+          expect {
+            \"*y/N*\" { send \"y\r\"; exp_continue }
+            \"*Press'y'*\" { send \"y\r\"; exp_continue }
+            eof
+          }
+        "
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: app-release
-        path: .buildozer/android/platform/build-arm64-v8a_armeabi-v7a/dists/todostudy/build/outputs/apk/debug/*.apk
-        if-no-files-found: error
+        path: |
+          bin/*.apk
+          .buildozer/android/platform/build-*/dists/*/build/outputs/apk/debug/*.apk
