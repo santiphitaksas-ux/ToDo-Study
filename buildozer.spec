@@ -5,10 +5,11 @@ package.domain = org.test
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
-requirements = python3,kivy,sqlite3
+requirements = python3,kivy==2.2.1,sqlite3
 orientation = portrait
 osx.kivy_version = 2.2.1
 fullscreen = 0
+icon.filename = S__7282690.jpg
 android.permissions = INTERNET
 android.api = 33
 android.minapi = 21
@@ -19,15 +20,3 @@ p4a.branch = master
 [buildozer]
 log_level = 2
 warn_on_root = 1
-[buildozer]
-# ...existing config...
-
-[app:app]
-# ...existing config...
-
-[buildozer]
-# ...
-
-[buildozer:buildozer]
-python_version = 3.11
-# or use python_version = 3.10 for even better compatibility
