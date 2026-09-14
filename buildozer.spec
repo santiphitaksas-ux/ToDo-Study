@@ -19,3 +19,15 @@ p4a.branch = master
 [buildozer]
 log_level = 2
 warn_on_root = 1
+[buildozer]
+# ...existing config...
+
+[app:app]
+# ...existing config...
+
+[buildozer]
+# ...
+
+[buildozer:buildozer]
+python_version = 3.11
+# or use python_version = 3.10 for even better compatibility
