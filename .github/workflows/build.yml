@@ -39,3 +39,7 @@ jobs:
       with:
         name: app-release
         path: bin/*.apk
+    - name: Set up Python
+     uses: actions/setup-python@v4
+     with:
+     python-version: '3.11'  # Change from 3.12+ to 3.11
